@@ -26,7 +26,11 @@
 5. DOM加载完成时间
 6. 白屏时间
 7. LCP最大内容绘制时间
-8. 页面FPS卡顿率
+
+### navitation-timing 关键时间点
+
+[!image](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ce6f41887a9a469f8384e3302b576850~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?)
+
 
 # 目录
 ```js
