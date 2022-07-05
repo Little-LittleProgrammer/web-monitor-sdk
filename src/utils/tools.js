@@ -1,18 +1,19 @@
 export function deep_copy(target) {
-    if (typeof target === 'object') {
-        const result = Array.isArray(target) ? [] : {};
-        for (const key in target) {
-            if (typeof target[key] == 'object') {
-                result[key] = deep_copy(target[key]);
-            } else {
-                result[key] = target[key];
-            }
-        }
+    // if (typeof target === 'object') {
+    //     const result = Array.isArray(target) ? [] : {};
+    //     for (const key in target) {
+    //         if (typeof target[key] == 'object') {
+    //             result[key] = deep_copy(target[key]);
+    //         } else {
+    //             result[key] = target[key];
+    //         }
+    //     }
 
-        return result;
-    }
+    //     return result;
+    // }
 
-    return target;
+    // return target;
+    return JSON.parse(JSON.stringify(target));
 }
 
 export function get_unique_id(len, radix) { //  指定长度和基数
@@ -62,7 +63,8 @@ export function get_error_uid(input) {
 
 // 获取页面url
 export function get_page_url() {
-    return window.location.href;
+    const _url = window.location.href.split('?')[0];
+    return _url;
 }
 
 // 获取浏览器是否支持sendBeacon(同步请求不阻塞浏览器进程)

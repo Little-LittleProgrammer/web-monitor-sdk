@@ -1,5 +1,5 @@
 import { on_load } from '../utils/listen';
-import { is_support_performance_observer, get_network_info } from '../utils/tools';
+import { is_support_performance_observer, get_network_info, get_page_url } from '../utils/tools';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
@@ -30,25 +30,48 @@ export function observe_event(entryType) {
             const _reportData = {
                 type: 'performance',
                 subType: entryType,
-                extraData: {
+                extraData: {}
+            };
+            if (entryType === 'navigation') {
+                console.log('navigation', entry);
+                _reportData.pageURL = get_page_url();
+                _reportData.extraData = {
+                    fp: entry.responseEnd - entry.fetchStart, // 白屏时间
+                    tti: entry.domInteractive - entry.fetchStart, // 首次可交互时间
+                    domReady: entry.domContentLoadedEventEnd - entry.fetchStart, // HTML加载完成时间
+                    load: entry.loadEventStart - entry.fetchStart, // 页面完全加载时间
+                    firstByte: entry.responseStart - entry.domainLookupStart, // 首包时间
+                    // 关键时间段
+                    dns: entry.domainLookupEnd - entry.domainLookupStart, // DNS查询耗时
+                    tcp: entry.connectEnd - entry.connectStart, // TCP连接耗时
+                    ssl: entry.secureConnectionStart ? entry.connectEnd - entry.secureConnectionStart : 0, // SSL安全连接耗时
+                    ttfb: entry.responseStart - entry.requestStart, // 请求响应耗时
+                    trans: entry.responseEnd - entry.responseStart, // 内容传输耗时
+                    domParse: entry.domInteractive - entry.responseEnd, // DOM解析耗时
+                    res: entry.loadEventStart - entry.domContentLoadedEventEnd // 资源加载耗时
+                };
+            } else {
+                _reportData.extraData = {
                     name: entry.name.split('/')[entry.name.split('/').length - 1], // 资源名称
                     sourceType: entry.initiatorType, // 资源类型
-                    duration: entry.duration, // 资源加载耗时
-                    redirect: (entry.redirectEnd - entry.redirectStart), // 重定向耗时
-                    dns: (entry.domainLookupEnd - entry.domainLookupStart), // DNS 耗时
-                    tcp: (entry.connectEnd - entry.connectStart), // 建立 tcp 连接耗时
-                    request: (entry.responseStart - entry.requestStart), // 请求耗时
-                    response: (entry.responseEnd - entry.responseStart), // 响应耗时
                     ttfb: entry.responseStart, // 首字节时间
                     transferSize: entry.transferSize, // 资源大小
                     protocol: entry.nextHopProtocol, // 请求协议
                     encodedBodySize: entry.encodedBodySize, // 资源解压前响应内容大小
                     decodedBodySize: entry.decodedBodySize, // 资源解压后的大小
-                    resourceRatio: (entry.decodedBodySize / entry.encodedBodySize) || 1,
+                    resourceRatio: (entry.decodedBodySize / entry.encodedBodySize) || 1, // 资源压缩比
                     isCache: is_cahce(entry), // 是否命中缓存
-                    startTime: performance.now()
-                }
-            };
+                    startTime: performance.now(),
+                    // 关键时间段
+                    redirect: (entry.redirectEnd - entry.redirectStart), // 重定向耗时
+                    dns: (entry.domainLookupEnd - entry.domainLookupStart), // DNS 耗时
+                    tcp: (entry.connectEnd - entry.connectStart), // 建立 tcp 连接耗时
+                    request: (entry.responseStart - entry.requestStart), // 请求耗时
+                    response: (entry.responseEnd - entry.responseStart), // 响应耗时
+                    duration: entry.duration // 资源加载耗时
+                };
+            }
+
             const _networkInfo = get_network_info();
             if (_networkInfo) {
                 _reportData.networkInfo = {
