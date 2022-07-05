@@ -1,0 +1,20 @@
+{
+  "name": "qm-web-monitor-sdk",
+  "version": "1.0.0",
+  "description": "seven cat web monitor sdk ",
+  "main": "rollup.config.js",
+  "scripts": {
+    "dev": "rollup --config build/rollup.config.dev.js -w",
+    "build": "rollup --config build/rollup.config.build.js --compact"
+  },
+  "author": "Evan Wu",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^2.0.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
