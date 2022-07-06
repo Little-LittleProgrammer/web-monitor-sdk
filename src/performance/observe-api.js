@@ -9,7 +9,7 @@ function overwrite_xhr() {
     const _open = _xhr.open;
     const _send = _xhr.send;
     _xhr.open = function new_open(...args) {
-        this.url = args[1];
+        this.url = args[1].split('?')[0];
         this.method = args[0];
         _open.apply(this, args);
     };
