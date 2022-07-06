@@ -1,14 +1,14 @@
 {
     "name": "qm-web-monitor-sdk",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "seven cat web monitor sdk ",
     "main": "lib/monitor.esm.js",
     "module": "lib/monitor.esm.js",
     "scripts": {
       "dev": "rollup --config build/rollup.config.dev.js -w",
       "build": "rollup --config build/rollup.config.build.js --compact",
-      "copy": "cp package.json README.md dist",
-      "publish": "npm run copy && npm run build && cd dist && npm publish" 
+      "copy": "cp -rf package.json README.md dist",
+      "lib": "npm run build && npm run copy && cd dist && npm publish" 
     },
     "author": "Evan Wu",
     "license": "ISC",
