@@ -11,7 +11,7 @@ function resolve(dir) {
 export default {
     input: resolve('../src/index.js'),
     output: {
-        file: resolve('../dist/monitor.js'),
+        file: resolve('../dist/lib/monitor.js'),
         format: 'iife',
         name: 'monitor',
         sourcemap: true,

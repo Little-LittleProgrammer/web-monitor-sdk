@@ -15,7 +15,7 @@ const _plugins = [
 export default [{
     input: resolve('../src/index.js'),
     output: {
-        file: resolve('../dist/monitor.cjs.js'),
+        file: resolve('../dist/lib/monitor.cjs.js'),
         format: 'cjs',
         name: 'monitor',
         sourcemap: false,
@@ -24,7 +24,7 @@ export default [{
 }, {
     input: resolve('../src/index.js'),
     output: {
-        file: resolve('../dist/monitor.esm.js'),
+        file: resolve('../dist/lib/monitor.esm.js'),
         format: 'es',
         name: 'monitor',
         sourcemap: false,

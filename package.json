@@ -1,20 +1,27 @@
 {
-  "name": "qm-web-monitor-sdk",
-  "version": "1.0.0",
-  "description": "seven cat web monitor sdk ",
-  "main": "rollup.config.js",
-  "scripts": {
-    "dev": "rollup --config build/rollup.config.dev.js -w",
-    "build": "rollup --config build/rollup.config.build.js --compact"
-  },
-  "author": "Evan Wu",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.18.6",
-    "@babel/preset-env": "^7.18.6",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^2.0.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "name": "qm-web-monitor-sdk",
+    "version": "1.0.0",
+    "description": "seven cat web monitor sdk ",
+    "main": "lib/monitor.esm.js",
+    "module": "lib/monitor.esm.js",
+    "scripts": {
+      "dev": "rollup --config build/rollup.config.dev.js -w",
+      "build": "rollup --config build/rollup.config.build.js --compact",
+      "copy": "cp package.json README.md dist",
+      "publish": "npm run copy && npm run build && cd dist && npm publish" 
+    },
+    "author": "Evan Wu",
+    "license": "ISC",
+    "devDependencies": {
+      "@babel/core": "^7.18.6",
+      "@babel/preset-env": "^7.18.6",
+      "rollup-plugin-babel": "^4.4.0",
+      "rollup-plugin-livereload": "^2.0.5",
+      "rollup-plugin-serve": "^2.0.0",
+      "rollup-plugin-terser": "^7.0.2"
+    },
+    "publishConfig": {
+        "registry": "https://packages.aliyun.com/5f6426fcdb0493ecef9118ab/npm/npm-registry/"
+    }
   }
-}
+  
