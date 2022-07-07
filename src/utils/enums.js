@@ -6,7 +6,8 @@ export const enumsPerformance = {
     CLS: 'cumulative-layout-shift',
     NT: 'navigation',
     RF: 'resource',
-    API: 'api'
+    API: 'api',
+    FMP: 'first-meaning-paint'
 };
 
 export const enumsError = {
