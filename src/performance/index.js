@@ -4,6 +4,7 @@ import { observe_lcp } from './observe-lcp';
 import { observe_cls } from './observe-cls';
 import { observe_fid } from './observe-fid';
 import { observe_api } from './observe-api';
+import { observe_fmp } from './observe-fmp';
 import { config } from '../config';
 import { observe_vue_router } from '../performance/observe-vue-router';
 
@@ -14,6 +15,7 @@ export function performance() {
     observe_cls();
     observe_fid();
     observe_api();
+    observe_fmp();
     if (config.vue?.Vue && config.vue?.router) {
         observe_vue_router(config.vue.Vue, config.vue.router);
     }

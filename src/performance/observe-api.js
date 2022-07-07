@@ -1,4 +1,3 @@
-import { get_network_info } from '../utils/tools';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
@@ -34,12 +33,6 @@ function overwrite_xhr() {
                     success: status >= 200 && status < 300
                 }
             };
-            const _networkInfo = get_network_info();
-            if (_networkInfo) {
-                _reportData.networkInfo = {
-                    ..._networkInfo
-                };
-            }
 
             performance_report(_reportData);
 
@@ -77,12 +70,6 @@ function overwrite_fetch() {
                     status: _data.status,
                     success: _data.ok
                 };
-                const _networkInfo = get_network_info();
-                if (_networkInfo) {
-                    _reportData.networkInfo = {
-                        ..._networkInfo
-                    };
-                }
 
                 performance_report(_reportData);
 
@@ -97,12 +84,6 @@ function overwrite_fetch() {
                     status: 0,
                     success: false
                 };
-                const _networkInfo = get_network_info();
-                if (_networkInfo) {
-                    _reportData.networkInfo = {
-                        ..._networkInfo
-                    };
-                }
                 performance_report(_reportData);
 
                 throw err;
@@ -110,7 +91,9 @@ function overwrite_fetch() {
     };
 }
 
-
+/**
+ * 监测 api接口
+ */
 export function observe_api() {
     overwrite_xhr();
     overwrite_fetch();

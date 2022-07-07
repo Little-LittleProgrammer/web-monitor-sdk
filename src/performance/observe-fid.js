@@ -1,9 +1,12 @@
-import { is_support_performance_observer, get_network_info, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
+/**
+ * 记录  用户首次输入的延迟
+ * @returns null
+ */
 export function observe_fid() {
-    // 用户首次输入的延迟
     if (!is_support_performance_observer()) {
         return;
     }
@@ -20,12 +23,6 @@ export function observe_fid() {
                     ...entry.toJSON()
                 }
             };
-            const _networkInfo = get_network_info();
-            if (_networkInfo) {
-                _reportData.networkInfo = {
-                    ..._networkInfo
-                };
-            }
             performance_report(_reportData);
         }
     }

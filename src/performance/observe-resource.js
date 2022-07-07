@@ -1,8 +1,11 @@
 import { on_load } from '../utils/listen';
-import { is_support_performance_observer, get_network_info, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
+/**
+ * 监测 静态资源 与 总页面加载的关键时间点
+ */
 export function observe_resource() {
     on_load(() => {
         observe_event(enumsPerformance.RF); // 单个资源指标
@@ -69,13 +72,6 @@ export function observe_event(entryType) {
                     request: (entry.responseStart - entry.requestStart), // 请求耗时
                     response: (entry.responseEnd - entry.responseStart), // 响应耗时
                     duration: entry.duration // 资源加载耗时
-                };
-            }
-
-            const _networkInfo = get_network_info();
-            if (_networkInfo) {
-                _reportData.networkInfo = {
-                    ..._networkInfo
                 };
             }
             performance_report(_reportData);

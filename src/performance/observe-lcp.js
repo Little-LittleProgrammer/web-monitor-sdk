@@ -1,4 +1,4 @@
-import { is_support_performance_observer, get_network_info, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
@@ -8,6 +8,10 @@ export function is_lcp_done() {
     return _lcpFlag;
 }
 
+/**
+ * 记录 最大内容绘制时间
+ * @returns null
+ */
 export function observe_lcp() {
     if (!is_support_performance_observer()) {
         _lcpFlag = true;
@@ -27,12 +31,6 @@ export function observe_lcp() {
                     ...entry.toJSON()
                 }
             };
-            const _networkInfo = get_network_info();
-            if (_networkInfo) {
-                _reportData.networkInfo = {
-                    ..._networkInfo
-                };
-            }
             performance_report(_reportData);
         }
     }

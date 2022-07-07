@@ -1,5 +1,5 @@
 import { post } from './request';
-import { get_unique_id, get_uuid } from '../utils/tools';
+import { get_unique_id, get_uuid, get_network_info } from '../utils/tools';
 import { config } from '../config';
 import { add_cache, get_cache, clear_cache } from '../utils/cache';
 
@@ -11,6 +11,12 @@ export async function report(data, isImmediate = false) {
         appName: config.appName,
         data
     };
+    const _networkInfo = get_network_info();
+    if (_networkInfo) {
+        _reportData.networkInfo = {
+            ..._networkInfo
+        };
+    }
     if (isImmediate) {
         await post(_reportData);
         return;

@@ -1,5 +1,5 @@
 import performance_report from '../http/performance-report';
-import { get_network_info, get_page_url } from '../utils/tools';
+import { get_page_url } from '../utils/tools';
 
 export function observe_vue_router(Vue, router) {
     let _isFirst = true;
@@ -40,12 +40,6 @@ export function observe_vue_router(Vue, router) {
                             duration: now - _startTime
                         }
                     };
-                    const _networkInfo = get_network_info();
-                    if (_networkInfo) {
-                        _reportData.networkInfo = {
-                            ..._networkInfo
-                        };
-                    }
                     performance_report(_reportData);
                 }, 1000);
             });
