@@ -1,4 +1,4 @@
-import { is_support_performance_observer, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools/index';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
@@ -8,10 +8,6 @@ export function is_lcp_done() {
     return _lcpFlag;
 }
 
-/**
- * 记录 最大内容绘制时间
- * @returns null
- */
 export function observe_lcp() {
     if (!is_support_performance_observer()) {
         _lcpFlag = true;

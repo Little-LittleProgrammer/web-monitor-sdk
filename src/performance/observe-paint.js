@@ -1,4 +1,4 @@
-import { is_support_performance_observer, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools/index';
 import performance_report from '../http/performance-report';
 
 /**

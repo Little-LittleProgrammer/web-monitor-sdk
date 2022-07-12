@@ -1,4 +1,4 @@
-import {  get_page_url } from '../utils/tools';
+import { get_page_url } from '../utils/tools/index';
 import { on_load } from '../utils/listen';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
@@ -18,9 +18,9 @@ let _entries = [];
 export function observe_fmp() {
     if (!MutationObserver) return;
 
-    const _next = window.requestAnimationFrame ? requestAnimationFrame : setTimeout
+    const _next = window.requestAnimationFrame ? requestAnimationFrame : setTimeout // 不影响正常性能
     const _ignoreDomList = ['STYLE', 'SCRIPT', 'LINK', 'META']
-    _observer = new MutationObserver(records => {
+    _observer = new MutationObserver(records => { // 监听 dom 元素
         check_dom_change()
         const _entry = {
             startTime: 0,
@@ -103,7 +103,7 @@ function get_render_time() {
 
 // node节点是否已经被记录
 function is_include(node, arr) {
-    if (!node && node === document.documentElement) {
+    if (!node || node === document.documentElement) {
         return false
     } 
     if (arr.includes(node)) {

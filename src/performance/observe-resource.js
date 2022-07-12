@@ -1,5 +1,5 @@
 import { on_load } from '../utils/listen';
-import { is_support_performance_observer, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools/index';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
@@ -36,7 +36,6 @@ export function observe_event(entryType) {
                 extraData: {}
             };
             if (entryType === 'navigation') {
-                console.log('navigation', entry);
                 _reportData.pageURL = get_page_url();
                 _reportData.extraData = {
                     fp: entry.responseEnd - entry.fetchStart, // 白屏时间

@@ -10,7 +10,7 @@ import { vue_error } from './vue-error';
  *      subType: 'js-error', // 副类型
  *      pageURL: source, // 页面
  *      startTime: performance.now(), // 出现时间
- *      extraObj: { // 额外数据
+ *      extraData: { // 额外数据
  *      }
  * }
  */

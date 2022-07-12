@@ -2,7 +2,7 @@ import { set_config, config } from './config';
 import { error } from './error/index';
 import { performance } from './performance/index';
 import { get_cache, clear_cache } from './utils/cache';
-import { sampling } from './utils/tools';
+import { sampling } from './utils/tools/index';
 import { on_beforeunload, on_hidden } from './utils/listen';
 import { report } from './http/report';
 
@@ -38,6 +38,9 @@ const qmWebMonitor = {
         } catch (err) {
             console.log('SDK出错, 已停用采集功能', err);
         }
+    },
+    use(callback) {
+        callback()
     }
 };
 export default qmWebMonitor;

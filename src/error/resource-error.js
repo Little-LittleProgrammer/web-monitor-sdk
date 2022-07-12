@@ -1,4 +1,4 @@
-import { get_page_url, get_error_uid } from '../utils/tools';
+import { get_page_url, get_error_uid } from '../utils/tools/index';
 import error_report from '../http/error-report';
 import { enumsError } from '../utils/enums';
 
@@ -15,12 +15,16 @@ export function resource_error() {
                 subType: enumsError.RE,
                 startTime: e.timeStamp,
                 pageURL: get_page_url(),
-                errorUid: get_error_uid(`resource-error-${target.src}-${target.tagName}`),
-                extraObj: {
-                    url: _url,
-                    html: target.outerHTML,
-                    resourceType: target.tagName,
-                    paths: e.path.map((item) => item.tagName).filter((i) => i)
+                extraData: {
+                    type: 'ResourceError',
+                    msg: '',
+                    errorUid: get_error_uid(`resource-error-${target.src}-${target.tagName}`),
+                    meta: {
+                        url: _url,
+                        html: target.outerHTML,
+                        type: target.tagName,
+                        paths: e.path.map((item) => item.tagName).filter((i) => i)
+                    },
                 }
 
             };

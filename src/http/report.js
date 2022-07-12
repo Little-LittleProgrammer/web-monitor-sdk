@@ -1,5 +1,5 @@
 import { post } from './request';
-import { get_unique_id, get_uuid, get_network_info } from '../utils/tools';
+import { get_unique_id, get_uuid, get_network_info } from '../utils/tools/index';
 import { config } from '../config';
 import { add_cache, get_cache, clear_cache } from '../utils/cache';
 

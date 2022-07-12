@@ -1,12 +1,9 @@
-import { is_support_performance_observer, get_page_url } from '../utils/tools';
+import { is_support_performance_observer, get_page_url } from '../utils/tools/index';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
-/**
- * 记录  用户首次输入的延迟
- * @returns null
- */
 export function observe_fid() {
+    // 用户首次输入的延迟
     if (!is_support_performance_observer()) {
         return;
     }

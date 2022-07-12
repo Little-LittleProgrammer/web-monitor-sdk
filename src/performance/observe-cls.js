@@ -1,14 +1,10 @@
-import { is_support_performance_observer, get_page_url, deep_copy } from '../utils/tools';
+import { is_support_performance_observer, get_page_url, deep_copy } from '../utils/tools/index';
 import { on_hidden } from '../utils/listen';
 import performance_report from '../http/performance-report';
 import { enumsPerformance } from '../utils/enums';
 
-
-/**
- * 记录  页面元素偏移的累积分数
- * @detail 页面元素偏移的累积分数 采用的是谷歌定的规则, 5秒内的页面中的一个会话窗口的偏移, 每间隔一秒进行计算
- * @detail 布局偏移分数 = 影响分数 * 距离分数
- */
+// 页面元素偏移的累积分数 采用的是谷歌定的规则, 5秒内的页面中的一个会话窗口的偏移, 每间隔一秒进行计算
+// 布局偏移分数 = 影响分数 * 距离分数
 export function observe_cls() {
     if (!is_support_performance_observer()) return;
 

@@ -1,3 +1,6 @@
+export * from './error-tools'
+export * from './performance-tools'
+
 export function deep_copy(target) {
     // if (typeof target === 'object') {
     //     const result = Array.isArray(target) ? [] : {};
@@ -57,10 +60,6 @@ export function get_uuid() { // 用户id
     return _uuid;
 }
 
-export function get_error_uid(input) {
-    return window.btoa(unescape(encodeURIComponent(input)));
-}
-
 // 获取页面url
 export function get_page_url() {
     const _url = window.location.href.split('?')[0];
@@ -70,11 +69,6 @@ export function get_page_url() {
 // 获取浏览器是否支持sendBeacon(同步请求不阻塞浏览器进程)
 export function is_support_send_beacon() {
     return !!(window.navigator && window.navigator.sendBeacon);
-}
-
-// 是否支持 performanceObserver
-export function is_support_performance_observer() {
-    return !!window.PerformanceObserver;
 }
 
 export function get_network_info() {
@@ -90,61 +84,9 @@ export function get_network_info() {
     return null;
 }
 
-
-export const scores = {
-    fp: [500, 1500],
-    fcp: [1500, 3000],
-    lcp: [2500, 4000],
-    fid: [100, 250],
-    tbt: [300, 600],
-    cls: [0.1, 0.25]
-};
-
-export const scoreLevel = ['good', 'needsImprovement', 'poor'];
-
-/**
- * 评分
- * @param {*} type 当前性能类型
- * @param {*} data 性能指数
- * @returns 结果
- */
-export const get_score = (type, data) => {
-    const score = scores[type];
-    for (let i = 0; i < score.length; i++) {
-        if (data <= score[i]) return scoreLevel[i];
-    }
-
-    return scoreLevel[2];
-};
-
-// 来源：稀土掘金
-// 获取报错组件名
-const classifyRE = /(?:^|[-_])(\w)/g;
-const classify = (str) => str.replace(classifyRE, (c) => c.toUpperCase()).replace(/[-_]/g, '');
-const ROOT_COMPONENT_NAME = '<Root>';
-const ANONYMOUS_COMPONENT_NAME = '<Anonymous>';
-export function get_component_name(vm, includeFile) {
-    if (!vm) {
-        return ANONYMOUS_COMPONENT_NAME;
-    }
-    if (vm.$root === vm) {
-        return ROOT_COMPONENT_NAME;
-    }
-    const options = vm.$options;
-    let name = options.name || options._componentTag;
-    const file = options.__file;
-    if (!name && file) {
-        const match = file.match(/([^/\\]+)\.vue$/);
-        if (match) {
-            name = match[1];
-        }
-    }
-    return (
-        (name ? `<${classify(name)}>` : ANONYMOUS_COMPONENT_NAME) + (file && includeFile !== false ? ` at ${file}` : '')
-    );
-}
-
 // 采样率设置, 最基本的方式
 export function sampling(sample) {
     return Math.random() * 100 <= sample;
 }
+
+

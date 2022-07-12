@@ -1,5 +1,5 @@
 import { config } from '../config';
-import { is_support_send_beacon } from '../utils/tools';
+import { is_support_send_beacon } from '../utils/tools/index';
 
 export function reportWithXHR(data) {
     const _xhr = new XMLHttpRequest()

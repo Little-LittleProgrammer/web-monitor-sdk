@@ -1,5 +1,5 @@
 import performance_report from '../http/performance-report';
-import { get_page_url } from '../utils/tools';
+import { get_page_url } from '../utils/tools/index';
 
 export function observe_vue_router(Vue, router) {
     let _isFirst = true;
